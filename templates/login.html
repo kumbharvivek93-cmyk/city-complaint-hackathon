@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %} Login {% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<div class="container login-box">
+
+    <h2 class="text-center mb-4">🔐 Welcome Back</h2>
+
+    <form method="POST" action="/login">
+
+        <div class="mb-3">
+            <label class="form-label">🆔 Aadhaar Number</label>
+            <input type="text" name="adhar_no" class="form-control" placeholder="Enter Aadhaar" required>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">📱 Mobile Number</label>
+            <input type="text" name="mobile_no" class="form-control" placeholder="Enter mobile number" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100">Login</button>
+
+    </form>
+
+    <p class="text-center mt-3">
+        New user?
+        <a href="/signup" class="text-info">Create account</a>
+    </p>
+
+</div>
+
+{% endblock %}
