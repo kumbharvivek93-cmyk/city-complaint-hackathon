@@ -1,0 +1,72 @@
+/* 🌌 Background */
+body {
+    background: linear-gradient(-45deg, #000000, #1c1c1c, #2c5364, #203a43);
+    background-size: 400% 400%;
+    animation: gradientBG 12s ease infinite;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+}
+
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* 📊 Heading */
+h2 {
+    font-weight: bold;
+    background: linear-gradient(90deg, #00dbde, #fc00ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* 🧊 Table Style */
+.table {
+    background: rgba(255,255,255,0.05);
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+/* Table Header */
+.table th {
+    background: rgba(0,0,0,0.7);
+    color: #00eaff;
+    text-align: center;
+}
+
+/* Table Rows */
+.table td {
+    text-align: center;
+    vertical-align: middle;
+}
+
+/* Hover effect */
+.table tbody tr:hover {
+    background: rgba(0,255,255,0.1);
+    transition: 0.3s;
+}
+
+/* 📸 Images */
+img {
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,255,255,0.3);
+}
+
+/* 📦 Container spacing */
+.container {
+    margin-top: 50px;
+}
+
+/* 🟢 Status Colors */
+td:nth-child(4) {
+    font-weight: bold;
+}
+
+td:contains("Pending") {
+    color: orange;
+}
+
+td:contains("Resolved") {
+    color: lightgreen;
+}
