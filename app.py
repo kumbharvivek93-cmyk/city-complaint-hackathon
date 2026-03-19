@@ -98,6 +98,15 @@ def cityzens():
     user=User.query.all()
     return render_template("citizens.html",users=user)
 
+@app.route("/complaint_category")
+def complaint_category():
+    if "name" in session:
+        flash("lets do it ! ")
+        return render_template("category.html")
+    else:
+        flash("you are not logged in !!")
+        return render_template("login.html")
+
 
 @app.route("/logout",methods=["GET","POST"])
 def logout():
@@ -119,48 +128,42 @@ def logout():
         else:
             return render_template("logout.html")
 
+
 @app.route("/complaint", methods=["GET", "POST"])
 def complaint():
-    if "name" not in session:
-        return redirect(url_for("login"))
 
     if request.method == "POST":
+        name = request.form.get("user_name")
         category = request.form.get("category")
         description = request.form.get("description")
+        image = request.files.get("image")
 
-        file = request.files.get('image')
+        print(name, category, description, image)
 
-        filename = None
-        if file and file.filename != "":
-            filename = secure_filename(file.filename)
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        if image and image.filename != "":
+            image_path = "static/uploads/" + image.filename
+            image.save(image_path)
+        else:
+            image_path = None
 
         new_complaint = Complaint(
-            user_name=session["name"],
+            user_name=name,
             category=category,
             description=description,
-            image=filename   
+            image=image.filename if image else None
         )
 
         db.session.add(new_complaint)
         db.session.commit()
-
-        flash("Complaint submitted!")
         return redirect(url_for("dashboard"))
 
     return render_template("complaint.html")
 
-@app.route("/dashboard")
+
+@app.route("/dashboard",methods=["GET","POST"])
 def dashboard():
-    if "name" not in session:
-        flash("Please login first!")
-        return redirect(url_for("login"))
-
-    user_name = session["name"]
-    complaints = Complaint.query.filter_by(user_name=user_name).all()
-
+    complaints = Complaint.query.all()
     return render_template("dashboard.html", complaints=complaints)
-
 
 if __name__=="__main__":
     with app.app_context():
