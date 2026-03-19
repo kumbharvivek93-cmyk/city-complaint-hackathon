@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %} Logout {% endblock %}
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='logout.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<div class="logout-container">
+    <div class="logout-box">
+
+        <h2>⚠️ Confirm Logout</h2>
+        <p>Are you sure you want to logout?</p>
+
+        <form method="POST">
+            <button type="submit" name="response" value="yes" class="btn yes-btn">Yes, Logout</button>
+            <button type="submit" name="response" value="no" class="btn no-btn">No, Stay</button>
+        </form>
+
+    </div>
+</div>
+
+{% endblock %}
