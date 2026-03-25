@@ -16,7 +16,7 @@ if not os.path.exists(UPLOAD_FOLDER):
 
 db=SQLAlchemy(app)
 
-class User(db.Model):
+class user(db.Model):
     name=db.Column(db.String(50))
     mobile_no=db.Column(db.String(13))
     adhar_no=db.Column(db.String(13),primary_key=True)
@@ -26,13 +26,16 @@ class User(db.Model):
         self.mobile_no=mobile_no
         self.adhar_no=adhar_no
 
-class Complaint(db.Model):
+class complaint(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_name = db.Column(db.String(50))
     category = db.Column(db.String(50))
     description = db.Column(db.Text)
     image = db.Column(db.String(200))   
     status = db.Column(db.String(20), default="Pending")
+
+with app.app_context():
+    db.create_all()
 
 
 
@@ -50,7 +53,7 @@ def signup():
         mobile_no=request.form.get("mobile_no")
         adhar_no=request.form.get("adhar_no")
 
-        new_user=User(
+        new_user=user(
             name=name,
             mobile_no=mobile_no,
             adhar_no=adhar_no
@@ -59,13 +62,18 @@ def signup():
         session["mobile_no"]=mobile_no
         session["aadhar"]=adhar_no
 
-        db.session.add(new_user)
-        db.session.commit()
+        try:
+            db.session.add(new_user)
+            db.session.commit()
+            print("user addin in database !!")
+        except Exception as e:
+            db.session.rollback()
+            print(e)
         
-        return redirect(url_for("complaint"))
+        return redirect(url_for("Complaint"))
     else:
         if "name" in session:
-            return redirect(url_for("complaint"))
+            return redirect(url_for("Complaint"))
         else :
             return render_template("signup.html")
 
@@ -77,28 +85,28 @@ def login():
         adhar_no=request.form.get("adhar_no")
         mobile_no=request.form.get("mobile_no")
 
-        user=User.query.filter_by(adhar_no=adhar_no).first()
+        user=user.query.filter_by(adhar_no=adhar_no).first()
         if user and user.mobile_no ==mobile_no :
             flash("logged in successfully !")
             session["name"] = user.name
             session["mobile_no"] = user.mobile_no
             session["aadhar"] = user.adhar_no
-            return redirect(url_for("complaint"))
+            return redirect(url_for("Complaint"))
         else:
             flash("user not found !")
             return redirect(url_for("signup"))
     else :
         if "name" in session:
-            return redirect(url_for("complaint"))
+            return redirect(url_for("Complaint"))
         else :
             return render_template("login.html")
 
 @app.route("/cityzens",methods=["GET","POST"])
 def cityzens():
-    user=User.query.all()
+    user=user.query.all()
     return render_template("citizens.html",users=user)
 
-@app.route("/complaint_category")
+@app.route("/complaint_category",methods=["GET","POST"])
 def complaint_category():
     if "name" in session:
         flash("lets do it ! ")
@@ -112,10 +120,13 @@ def complaint_category():
 def logout():
     session.permanent=True
     if request.method=="POST":
-        res=request.form.get("responce")
+        res=request.form.get("response")
         session["res"]=res
 
         if res=="yes":
+            session.pop("name",None)
+            session.pop("aadhar",None)
+            session.pop("mobile_no",None)
             session.clear()
             flash("logged out !!")
             return redirect(url_for("login"))
@@ -130,42 +141,62 @@ def logout():
 
 
 @app.route("/complaint", methods=["GET", "POST"])
-def complaint():
-
+def Complaint():
     if request.method == "POST":
         name = request.form.get("user_name")
         category = request.form.get("category")
         description = request.form.get("description")
         image = request.files.get("image")
+        session["name"]=name
+        session["ncategoryame"]=category
+        session["description"]=description
+        
 
-        print(name, category, description, image)
 
+        filename = None
         if image and image.filename != "":
-            image_path = "static/uploads/" + image.filename
-            image.save(image_path)
-        else:
-            image_path = None
+            filename = secure_filename(image.filename)
+            image.save(os.path.join("static/uploads", filename))
 
-        new_complaint = Complaint(
+        new_complaint = complaint(
             user_name=name,
             category=category,
             description=description,
-            image=image.filename if image else None
+            image=filename
         )
+        try :
+            db.session.add(new_complaint)
+            db.session.commit()
+            print("complaint adde in database !!")
+        except Exception as e:
+            db.session.rollback()
+            print(e)
 
-        db.session.add(new_complaint)
-        db.session.commit()
+
         return redirect(url_for("dashboard"))
 
     return render_template("complaint.html")
 
-
 @app.route("/dashboard",methods=["GET","POST"])
 def dashboard():
-    complaints = Complaint.query.all()
+    if "name" not in session:
+        flash("Please login first!")
+        return redirect(url_for("login"))
+
+    user_name = session["name"]
+
+    complaints = complaint.query.filter_by(user_name=user_name).all()
+
+    if complaints:
+        flash("Complaint submitted successfully! Thank you 🙏")
+    else:
+        flash("You have not submitted any complaint!")
+
     return render_template("dashboard.html", complaints=complaints)
 
+
 if __name__=="__main__":
-    with app.app_context():
-        db.create_all()
     app.run(debug=True)
+
+
+# this is modified version build to run multithreaded on gunicorn etc for deployment    ~ spyder aidev vivek sir love you all 
