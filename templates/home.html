@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block title %} HOME {% endblock %}
+{% block css %} <link rel="stylesheet" href="{{ url_for('static',filename='home.css') }}"> {% endblock %}
+{% block content %}
+
+<section class="home-hero">
+    <div class="container text-center">
+        <div class="hero-card">
+            <p class="home-eyebrow">Baramati Smart Civic Portal</p>
+            <h1 class="display-4 fw-bold">Protect city services and digital assets in one complaint flow.</h1>
+            <p class="lead mt-3 hero-text">
+                Report issues across Baramati sectors like health, education, tourism, sports,
+                organizations, and public services while also highlighting digital asset risks.
+            </p>
+
+            <div class="mt-4 d-flex flex-wrap justify-content-center gap-3">
+                {% if "name" in session %}
+                <a href="{{ url_for('complaint_category') }}" class="btn btn-warning btn-lg">Choose Sector</a>
+                <a href="{{ url_for('dashboard') }}" class="btn btn-outline-light btn-lg">View Dashboard</a>
+                {% else %}
+                <a href="{{ url_for('complaint_category') }}" class="btn btn-warning btn-lg">Explore Sectors</a>
+                <a href="/login" class="btn btn-primary btn-lg">Login</a>
+                <a href="/signup" class="btn btn-outline-success btn-lg">Sign Up</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="container text-center feature-section">
+    <h2>Why use this platform?</h2>
+
+    <div class="row mt-4 g-4">
+        <div class="col-md-4">
+            <div class="feature-box h-100">
+                <h4>📢 Sector-Based Reporting</h4>
+                <p>Start from the Baramati sector page and send complaints to the right civic area faster.</p>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="feature-box h-100">
+                <h4>🛡️ Digital Asset Protection</h4>
+                <p>Report risks affecting records, portals, service dashboards, and citizen-facing data.</p>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="feature-box h-100">
+                <h4>📍 Track Issues</h4>
+                <p>Monitor submitted complaints and keep a record of problems affecting city services.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

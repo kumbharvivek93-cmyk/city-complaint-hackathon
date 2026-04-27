@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %}Complaint Categories{% endblock %}
+
+{% block body %}
+
+<div class="container mt-5">
+  <h2 class="text-center mb-4">Register Your Complaint</h2>
+
+  <div class="row g-4">
+
+    <!-- Road -->
+    <div class="col-md-6 col-lg-3">
+      <a href="/complaint?category=Road" class="text-decoration-none">
+        <div class="card text-center p-4 shadow-sm">
+          <h4>🚧 Road</h4>
+          <p>Potholes, damaged roads</p>
+        </div>
+      </a>
+    </div>
+
+    <!-- Water -->
+    <div class="col-md-6 col-lg-3">
+      <a href="/complaint?category=Water" class="text-decoration-none">
+        <div class="card text-center p-4 shadow-sm">
+          <h4>💧 Water</h4>
+          <p>Leakage, supply issues</p>
+        </div>
+      </a>
+    </div>
+
+    <!-- Electricity -->
+    <div class="col-md-6 col-lg-3">
+      <a href="/complaint?category=Electricity" class="text-decoration-none">
+        <div class="card text-center p-4 shadow-sm">
+          <h4>⚡ Electricity</h4>
+          <p>Power cuts, wiring issues</p>
+        </div>
+      </a>
+    </div>
+
+    <!-- Other -->
+    <div class="col-md-6 col-lg-3">
+      <a href="/complaint?category=Other" class="text-decoration-none">
+        <div class="card text-center p-4 shadow-sm">
+          <h4>📦 Other</h4>
+          <p>Any other issues</p>
+        </div>
+      </a>
+    </div>
+
+  </div>
+</div>
+
+{% endblock %}

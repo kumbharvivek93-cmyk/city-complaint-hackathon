@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='dashboard.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+    <h2 class="mb-4">Your Complaints</h2>
+
+    {% if complaints %}
+    <div class="table-responsive">
+        <table class="table align-middle">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Category</th>
+                    <th>Description</th>
+                    <th>Status</th>
+                    <th>Image</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for c in complaints %}
+                <tr>
+                    <td>{{ c.id }}</td>
+                    <td>{{ c.category }}</td>
+                    <td>{{ c.description }}</td>
+                    <td>{{ c.status }}</td>
+                    <td>
+                        {% if c.image %}
+                        <img src="{{ url_for('static', filename='uploads/' + c.image) }}" width="100" alt="Complaint proof">
+                        {% else %}
+                        No image
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <div class="alert alert-light">No complaints submitted yet.</div>
+    {% endif %}
+</div>
+
+{% endblock %}

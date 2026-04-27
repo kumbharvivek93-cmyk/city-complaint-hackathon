@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %} Complaint {% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='complaint.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+  <form method="POST" action="{{ url_for('complaint_form') }}" enctype="multipart/form-data" class="p-4 shadow rounded bg-white">
+
+    <div class="mb-3">
+        <label>Your Name</label>
+        <input
+          type="text"
+          name="user_name"
+          class="form-control"
+          placeholder="Enter your name"
+          value="{{ current_user }}"
+          readonly
+          required
+        >
+        <small class="text-muted">Your complaint will be saved under your logged-in account.</small>
+    </div>
+
+    <div class="mb-3">
+        <label>Category</label>
+        <select name="category" class="form-control" required>
+            {% for sector in sectors %}
+            <option value="{{ sector.name }}" {% if selected_category == sector.name %}selected{% endif %}>{{ sector.name }}</option>
+            {% endfor %}
+        </select>
+        <small class="text-muted">Choose the Baramati sector where the complaint or digital asset issue belongs.</small>
+    </div>
+
+    <div class="mb-3">
+        <label>Description</label>
+        <textarea name="description" class="form-control" rows="4"
+        placeholder="Describe your problem clearly..." required></textarea>
+    </div>
+
+    <div class="mb-3">
+        <label>Upload Image</label>
+        <input type="file" name="image" class="form-control" accept=".png,.jpg,.jpeg,.gif,.webp">
+    </div>
+
+    <button class="btn btn-primary w-100">Submit Complaint</button>
+
+  </form>
+</div>
+
+{% endblock %}

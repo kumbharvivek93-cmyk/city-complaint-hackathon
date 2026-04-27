@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static',filename='category.css') }}">
+{% endblock%}
+
+{% block title %}Baramati Sectors{% endblock %}
+
+{% block content %}
+
+<section class="category-shell">
+  <div class="container py-5">
+    <div class="hero-panel shadow-lg">
+      <p class="eyebrow">Baramati City Complaint Portal</p>
+      <h1>Choose the sector where the issue affects civic services or digital assets.</h1>
+      <p class="hero-copy mb-0">
+        This page helps citizens of Baramati report issues related to public facilities,
+        online portals, records, and community services in one place.
+      </p>
+      <div class="hero-tags">
+        <span class="hero-pill">Citizen Data Safety</span>
+        <span class="hero-pill">Public Service Continuity</span>
+        <span class="hero-pill">Digital Asset Protection</span>
+      </div>
+    </div>
+
+    <div class="row g-4 sector-grid">
+      {% for sector in sectors %}
+      <div class="col-md-6 col-xl-4">
+        <a href="{{ url_for('complaint_form', category=sector.name) }}" class="sector-link">
+          <article class="sector-card {{ sector.theme_class }}">
+            <div class="sector-icon">{{ sector.icon }}</div>
+            <h3>{{ sector.name }}</h3>
+            <p>{{ sector.description }}</p>
+            <span class="asset-note">{{ sector.asset_note }}</span>
+          </article>
+        </a>
+      </div>
+      {% endfor %}
+    </div>
+
+    <div class="info-panel mt-4">
+      <h2>Why digital asset protection matters in Baramati</h2>
+      <p class="mb-0">
+        Along with physical complaints, citizens can highlight issues that affect digital records,
+        online portals, identity-linked services, and information security across key city sectors.
+      </p>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

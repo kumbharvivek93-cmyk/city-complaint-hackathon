@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %} Sign Up {% endblock %}
+{% block css %} <link rel="stylesheet" href="{{ url_for('static',filename='signup2.css') }}"> {% endblock %}
+
+{% block content %}
+
+<div class="container mt-5 signup-box">
+
+    <h2 class="text-center mb-4">🚀 Create Your Account</h2>
+
+    <form method="POST" action="{{ url_for('signup') }}">
+
+        <div class="mb-3">
+            <label class="form-label">👤 Full Name</label>
+            <input type="text" name="name" class="form-control" placeholder="Enter your name" required>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">📱 Mobile Number</label>
+            <input type="text" name="mobile_no" class="form-control" placeholder="Enter mobile number" required>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">🆔 Aadhaar Number</label>
+            <input type="text" name="adhar_no" class="form-control" placeholder="Enter 12-digit Aadhaar" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100">Sign Up</button>
+
+    </form>
+
+    <p class="text-center mt-3">
+        Already have an account?
+        <a href="{{ url_for('login') }}" class="text-info">Login here</a>
+    </p>
+
+</div>
+
+{% endblock %}

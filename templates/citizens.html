@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %} Citizens {% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='citizens.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <h2 class="text-center mb-4">🌍 City Citizens</h2>
+
+    <div class="card-container">
+
+        {% for user in users %}
+        <div class="citizen-card">
+            <h4>👤 {{ user.name }}</h4>
+        </div>
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% endblock %}
