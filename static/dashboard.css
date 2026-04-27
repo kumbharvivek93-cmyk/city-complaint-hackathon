@@ -1,0 +1,86 @@
+/* Background */
+body {
+    background: linear-gradient(135deg, #1f3b4d, #2e5d6f);
+    font-family: 'Poppins', sans-serif;
+    color: #fff;
+}
+
+/* Table Container */
+.table {
+    background: #ffffff;
+    border-radius: 15px;
+    overflow: hidden;
+    margin-top: 30px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+}
+
+/* Table Header */
+.table thead {
+    background: linear-gradient(135deg, #1e90ff, #00c6ff);
+    color: #fff;
+}
+
+.table thead th {
+    padding: 15px;
+    font-weight: 600;
+    text-align: center;
+}
+
+/* Table Body */
+.table tbody td {
+    padding: 15px;
+    text-align: center;
+    vertical-align: middle;
+    color: #333;
+}
+
+/* Row Hover Effect 🔥 */
+.table tbody tr {
+    transition: all 0.3s ease;
+}
+
+.table tbody tr:hover {
+    background: #f1f9ff;
+    transform: scale(1.01);
+}
+
+/* Image Styling */
+.table img {
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+}
+
+.table img:hover {
+    transform: scale(1.2);
+}
+
+/* Alternate Row Colors */
+.table tbody tr:nth-child(even) {
+    background: #fafafa;
+}
+
+/* No Image Text */
+td {
+    font-size: 14px;
+}
+
+/* Container spacing */
+.container {
+    padding-top: 40px;
+}
+
+/* Fade Animation */
+.table {
+    animation: fadeIn 0.6s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

@@ -1,0 +1,85 @@
+/* Background */
+body {
+    background: linear-gradient(135deg, #1f3b4d, #2e5d6f);
+    min-height: 100vh;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Form Container */
+form {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    padding: 30px;
+    max-width: 900px;
+    margin: auto;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+    animation: fadeIn 0.6s ease-in-out;
+}
+
+/* Labels */
+label {
+    font-weight: 500;
+    margin-bottom: 6px;
+    color: #333;
+}
+
+/* Inputs + Select + Textarea */
+.form-control {
+    border-radius: 10px;
+    padding: 12px;
+    border: 1px solid #ddd;
+    transition: all 0.3s ease;
+    box-shadow: none;
+}
+
+/* Focus effect 🔥 */
+.form-control:focus {
+    border-color: #4dabf7;
+    box-shadow: 0 0 10px rgba(77, 171, 247, 0.3);
+}
+
+/* Textarea bigger */
+textarea.form-control {
+    resize: none;
+}
+
+/* File Upload Styling */
+input[type="file"] {
+    padding: 10px;
+    background: #f8f9fa;
+}
+
+/* Button 🔥 */
+button {
+    margin-top: 15px;
+    border-radius: 50px !important;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    background: linear-gradient(135deg, #1e90ff, #00c6ff);
+    transition: all 0.3s ease;
+}
+
+/* Button Hover */
+button:hover {
+    transform: scale(1.03);
+    box-shadow: 0 10px 25px rgba(0, 198, 255, 0.4);
+}
+
+/* Container spacing */
+.container {
+    padding-top: 40px;
+}
+
+/* Smooth Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

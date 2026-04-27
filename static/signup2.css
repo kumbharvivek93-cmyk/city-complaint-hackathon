@@ -1,0 +1,106 @@
+/* 🌌 Animated Gradient Background */
+body {
+    background: linear-gradient(-45deg, #0f2027, #203a43, #2c5364, #000000);
+    background-size: 400% 400%;
+    animation: gradientBG 10s ease infinite;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+}
+
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* 🧊 Glass Card */
+.signup-box {
+    max-width: 500px;
+    margin: auto;
+    margin-top: 80px;
+    padding: 35px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(15px);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+    transition: 0.3s;
+}
+
+.signup-box:hover {
+    transform: translateY(-5px);
+}
+
+/* 🚀 Heading */
+h2 {
+    font-weight: 700;
+    background: linear-gradient(90deg, #00dbde, #fc00ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* 🧾 Labels */
+.form-label {
+    color: #ccc;
+}
+
+/* ✏️ Inputs */
+.form-control {
+    background: rgba(255,255,255,0.1);
+    border: none;
+    color: white;
+    border-radius: 12px;
+    padding: 10px;
+    transition: 0.3s;
+}
+
+.form-control::placeholder {
+    color: #aaa;
+}
+
+.form-control:focus {
+    background: rgba(255,255,255,0.15);
+    box-shadow: 0 0 12px #00c6ff;
+    color: white;
+}
+
+/* 🔘 Button */
+.btn-primary {
+    background: linear-gradient(45deg, #007bff, #00c6ff);
+    border: none;
+    border-radius: 30px;
+    font-weight: bold;
+    padding: 12px;
+    transition: 0.3s;
+}
+
+.btn-primary:hover {
+    transform: scale(1.07);
+    box-shadow: 0 0 15px #00c6ff;
+}
+
+/* 🔗 Login Link */
+a.text-info {
+    color: #00eaff !important;
+    text-decoration: none;
+}
+
+a.text-info:hover {
+    text-shadow: 0 0 10px #00eaff;
+}
+
+/* ✨ Flash Messages */
+p {
+    text-align: center;
+    background: rgba(0,255,150,0.1);
+    padding: 10px;
+    border-radius: 10px;
+    color: #00ffcc;
+}
+
+/* 📱 Responsive */
+@media (max-width: 768px) {
+    .signup-box {
+        margin-top: 40px;
+        padding: 20px;
+    }
+}

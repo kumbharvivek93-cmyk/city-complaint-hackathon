@@ -1,0 +1,21 @@
+html,
+body {
+    min-height: 100%;
+}
+
+body {
+    margin: 0;
+}
+
+.navbar-brand {
+    letter-spacing: 0.04em;
+}
+
+.flash-stack {
+    max-width: 960px;
+}
+
+.flash-message {
+    border: none;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+}
